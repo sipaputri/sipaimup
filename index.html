@@ -1,0 +1,427 @@
+
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Aplikasi ATPH - Pink Edition</title>
+<style>
+   
+body {
+    font-family: Arial;
+    /* Gradasi pink lembut: dari pink muda ke pink sangat terang */
+    background: linear-gradient(to bottom, #f8bbd0, #fce4ec);
+    text-align: center;
+}
+
+.header {
+    background: #d81b60; /* Pink tua elegan */
+    color: white;
+    padding: 15px;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card {
+    background: white;
+    margin: 15px auto;
+    padding: 15px;
+    width: 90%;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(216, 27, 96, 0.2);
+    transition: 0.2s;
+}
+
+button {
+    padding: 12px;
+    margin: 8px;
+    width: 200px;
+    background-color: #ec407a; /* Pink cerah */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background-color: #c2185b; /* Pink lebih gelap saat hover */
+    transform: scale(1.02);
+}
+
+.halaman {
+    display: none;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff0f5; /* lavender blush sentuhan pink */
+}
+
+th, td {
+    border: 1px solid #f06292; /* border pink lembut */
+    padding: 6px;
+}
+
+th {
+    background-color: #f06292; /* pink mencolok untuk header tabel */
+    color: white;
+}
+
+input, select {
+    width: 95%;
+    padding: 5px;
+    border: 1px solid #f48fb1;
+    border-radius: 6px;
+    background-color: #fff9fc;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #d81b60;
+    box-shadow: 0 0 4px #f48fb1;
+}
+
+/* sentuhan tambahan untuk tombol kembali agar serasi */
+.card button {
+    background-color: #f06292;
+}
+
+.card button:hover {
+    background-color: #d81b60;
+}
+
+/* ubah juga warna header di dalam tabel tetap konsisten */
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h1>🌸 Aplikasi ATPH</h1>
+    <p>SIFA | X ATPH 2</p>
+</div>
+
+<!-- BERANDA -->
+<div id="beranda" class="card">
+    <button onclick="showPage('jadwal')">📅 Jadwal</button><br>
+    <button onclick="showPage('alarm')">⏰ Alarm</button><br>
+    <button onclick="showPage('data')">🌱 Data</button>
+</div>
+
+<!-- JADWAL -->
+<div id="jadwal" class="card halaman">
+    <h2>📅 Jadwal</h2>
+    <button onclick="showPage('beranda')">⬅️ Kembali</button>
+
+    <table>
+        <tr>
+            <th>Tanggal</th>
+            <th>Kegiatan</th>
+            <th>Keterangan</th>
+        </tr>
+
+        <!-- 7 BARIS -->
+        <tr><td><input type="date"></td><td><select><option>Menanam</option><option>Menyiram</option><option>Memupuk</option><option>Panen</option></select></td><td><input placeholder="Catatan..."></td></tr>
+        <tr><td><input type="date"></td><td><select><option>Menanam</option><option>Menyiram</option><option>Memupuk</option><option>Panen</option></select></td><td><input placeholder="Catatan..."></td></tr>
+        <tr><td><input type="date"></td><td><select><option>Menanam</option><option>Menyiram</option><option>Memupuk</option><option>Panen</option></select></td><td><input placeholder="Catatan..."></td></tr>
+        <tr><td><input type="date"></td><td><select><option>Menanam</option><option>Menyiram</option><option>Memupuk</option><option>Panen</option></select></td><td><input placeholder="Catatan..."></td></tr>
+        <tr><td><input type="date"></td><td><select><option>Menanam</option><option>Menyiram</option><option>Memupuk</option><option>Panen</option></select></td><td><input placeholder="Catatan..."></td></tr>
+        <tr><td><input type="date"></td><td><select><option>Menanam</option><option>Menyiram</option><option>Memupuk</option><option>Panen</option></select></td><td><input placeholder="Catatan..."></td></tr>
+        <tr><td><input type="date"></td><td><select><option>Menanam</option><option>Menyiram</option><option>Memupuk</option><option>Panen</option></select></td><td><input placeholder="Catatan..."></td></tr>
+    </table>
+</div>
+
+<!-- ALARM -->
+<div id="alarm" class="card halaman">
+    <h2>⏰ Alarm Penyiraman</h2>
+    <button onclick="showPage('beranda')">⬅️ Kembali</button>
+
+    <br><br>
+
+    <input type="time" id="jam" style="width: auto; padding: 8px; font-size: 1.1rem;"><br>
+    <button onclick="setAlarm()">Set Alarm</button>
+    <button onclick="stopAlarm()" style="background-color:#d81b60;">🔕 Hentikan Alarm</button>
+
+    <h3 id="status"></h3>
+    <p id="alarmIndicator" style="font-size:12px; color:#d81b60; margin-top:10px;"></p>
+</div>
+
+<!-- DATA -->
+<div id="data" class="card halaman">
+    <h2>🌱 Data Tanaman</h2>
+    <button onclick="showPage('beranda')">⬅️ Kembali</button>
+
+    <table>
+        <tr>
+            <th>Nama</th>
+            <th>Tanggal</th>
+            <th>Keterangan</th>
+        </tr>
+
+        <!-- 7 BARIS -->
+        <tr><td><input placeholder="Nama tanaman"></td><td><input type="date"></td><td><input placeholder="Keterangan"></td></tr>
+        <tr><td><input placeholder="Nama tanaman"></td><td><input type="date"></td><td><input placeholder="Keterangan"></td></tr>
+        <tr><td><input placeholder="Nama tanaman"></td><td><input type="date"></td><td><input placeholder="Keterangan"></td></tr>
+        <tr><td><input placeholder="Nama tanaman"></td><td><input type="date"></td><td><input placeholder="Keterangan"></td></tr>
+        <tr><td><input placeholder="Nama tanaman"></td><td><input type="date"></td><td><input placeholder="Keterangan"></td></tr>
+        <tr><td><input placeholder="Nama tanaman"></td><td><input type="date"></td><td><input placeholder="Keterangan"></td></tr>
+        <tr><td><input placeholder="Nama tanaman"></td><td><input type="date"></td><td><input placeholder="Keterangan"></td></tr>
+    </table>
+</div>
+
+<!-- SUARA - menggunakan Web Audio API fallback dan multiple source -->
+<audio id="suara" preload="auto">
+    <source src="https://www.soundjay.com/button/beep-07.wav" type="audio/wav">
+    <source src="https://www.soundjay.com/button/beep-07.wav" type="audio/mpeg">
+</audio>
+
+<script>
+// ========================
+// PERBAIKAN ALARM AGAR BUNYI DENGAN ANDAL
+// ========================
+
+function showPage(id) {
+    document.getElementById("beranda").style.display = "none";
+    document.getElementById("jadwal").style.display = "none";
+    document.getElementById("alarm").style.display = "none";
+    document.getElementById("data").style.display = "none";
+
+    document.getElementById(id).style.display = "block";
+}
+
+// tampil awal
+document.getElementById("beranda").style.display = "block";
+
+// Variabel alarm
+let alarmWaktu = "";
+let alarmIntervalId = null;
+let alarmTimeoutId = null;
+let isAlarmRinging = false;
+
+// Fungsi untuk memutar suara dengan berbagai metode (agar pasti berbunyi)
+function playAlarmSound() {
+    const audio = document.getElementById("suara");
+    
+    // Metode 1: coba play audio element
+    if (audio) {
+        audio.currentTime = 0; // reset ke awal
+        audio.play().then(() => {
+            console.log("Audio berhasil diputar");
+        }).catch(err => {
+            console.log("Audio play error: ", err);
+            // Metode 2: fallback menggunakan Web Audio API (beep buatan sendiri)
+            fallbackBeep();
+        });
+    } else {
+        fallbackBeep();
+    }
+}
+
+// Fallback beep menggunakan Web Audio API (bekerja tanpa file eksternal)
+function fallbackBeep() {
+    try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        const audioCtx = new AudioContext();
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        
+        oscillator.frequency.value = 880; // nada tinggi
+        gainNode.gain.value = 0.3;
+        
+        oscillator.start();
+        gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 1);
+        oscillator.stop(audioCtx.currentTime + 0.8);
+        
+        // resume context jika suspended (karena kebijakan browser)
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+    } catch(e) {
+        console.log("Web Audio API gagal:", e);
+        // metode terakhir: alert sudah ada, tapi kita tetap coba vibrate jika support
+        if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+    }
+}
+
+// Fungsi untuk menghentikan alarm yang sedang berbunyi
+function stopAlarm() {
+    if (alarmTimeoutId) {
+        clearTimeout(alarmTimeoutId);
+        alarmTimeoutId = null;
+    }
+    if (alarmIntervalId) {
+        clearInterval(alarmIntervalId);
+        alarmIntervalId = null;
+    }
+    isAlarmRinging = false;
+    
+    const statusDiv = document.getElementById("status");
+    if (statusDiv && alarmWaktu) {
+        statusDiv.innerHTML = `🔔 Alarm diset pada pukul ${alarmWaktu} (dapat dihentikan)`;
+    } else if (statusDiv) {
+        statusDiv.innerHTML = `⏰ Alarm dihentikan. Setel ulang alarm.`;
+    }
+    
+    const indicator = document.getElementById("alarmIndicator");
+    if (indicator) indicator.innerHTML = "🔕 Alarm tidak aktif";
+    
+    // coba hentikan audio yang sedang bermain
+    const audio = document.getElementById("suara");
+    if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+    }
+}
+
+// Fungsi untuk memulai bunyi alarm berulang (setiap 5 detik, total 6 kali)
+function startRingingAlarm() {
+    if (isAlarmRinging) return;
+    isAlarmRinging = true;
+    
+    let ringCount = 0;
+    const maxRings = 6; // bunyi 6 kali
+    
+    // bunyi pertama langsung
+    playAlarmSound();
+    ringCount++;
+    
+    // bunyi berikutnya dengan interval 5 detik
+    alarmIntervalId = setInterval(() => {
+        if (ringCount < maxRings) {
+            playAlarmSound();
+            ringCount++;
+        } else {
+            // setelah bunyi maksimal, hentikan interval
+            if (alarmIntervalId) {
+                clearInterval(alarmIntervalId);
+                alarmIntervalId = null;
+            }
+            isAlarmRinging = false;
+        }
+    }, 5000);
+    
+    // Set timeout total 30 detik, setelah itu alarm berhenti total
+    alarmTimeoutId = setTimeout(() => {
+        if (alarmIntervalId) {
+            clearInterval(alarmIntervalId);
+            alarmIntervalId = null;
+        }
+        isAlarmRinging = false;
+    }, 30000);
+}
+
+function setAlarm() {
+    const jamInput = document.getElementById("jam").value;
+    if (!jamInput) {
+        document.getElementById("status").innerHTML = "⏰ Silakan pilih waktu terlebih dahulu!";
+        return;
+    }
+    
+    // Hentikan alarm yang sedang berjalan
+    stopAlarm();
+    
+    alarmWaktu = jamInput;
+    document.getElementById("status").innerHTML = "🔔 Alarm diset pada pukul " + alarmWaktu + " (penyiraman)";
+    document.getElementById("alarmIndicator").innerHTML = "⏰ Alarm aktif: menunggu pukul " + alarmWaktu;
+    
+    // Reset flag trigger untuk memastikan alarm bisa bunyi di menit yang sama
+    window._lastTriggerTime = "";
+}
+
+// Fungsi pengecekan alarm setiap detik (lebih andal)
+setInterval(function() {
+    if (!alarmWaktu || alarmWaktu === "") return;
+    
+    let now = new Date();
+    let jam = now.getHours().toString().padStart(2,'0');
+    let menit = now.getMinutes().toString().padStart(2,'0');
+    let detik = now.getSeconds().toString().padStart(2,'0');
+    let currentTime = jam + ":" + menit;
+    let currentFullTime = jam + ":" + menit + ":" + detik;
+    
+    // Cek apakah waktu saat ini (jam:menit) sama dengan alarmWaktu
+    if (currentTime === alarmWaktu) {
+        // Gunakan flag per detik untuk mencegah spam di detik yang sama
+        // Tapi kita perlu flag yang lebih granular: cek per menit + detik pertama
+        // agar hanya trigger sekali saat menit tersebut dimulai.
+        // Simpan trigger berdasarkan jam+menit, jika sudah trigger di menit ini jangan ulang
+        const menitKey = currentTime;
+        if (window._lastTriggerTime !== menitKey) {
+            window._lastTriggerTime = menitKey;
+            
+            // Tampilkan notifikasi dan suara
+            document.getElementById("alarmIndicator").innerHTML = "🔔🔊 ALARM BERBUNYI! Waktunya menyiram tanaman! 💧";
+            
+            // Mainkan suara dengan mekanisme berulang
+            startRingingAlarm();
+            
+            // Tampilkan alert (tidak mengganggu proses suara)
+            setTimeout(() => {
+                alert("⏰ Waktunya menyiram tanaman! 💧");
+            }, 100);
+            
+            // Update status di halaman alarm
+            const statusDiv = document.getElementById("status");
+            if (statusDiv) {
+                statusDiv.innerHTML = "🔊 Alarm SEDANG BERBUNYI! Segera siram tanaman 🌱";
+                setTimeout(() => {
+                    if (alarmWaktu) {
+                        statusDiv.innerHTML = "🔔 Alarm diset pada pukul " + alarmWaktu + " (penyiraman)";
+                    }
+                }, 8000);
+            }
+        }
+    } else {
+        // Jika waktu tidak sama, reset flag trigger agar bisa trigger lagi di menit berikutnya
+        // Namun jangan reset jika alarm belum pernah trigger di menit ini
+        if (window._lastTriggerTime && window._lastTriggerTime !== currentTime) {
+            window._lastTriggerTime = "";
+            // Update indikator bahwa alarm masih menunggu
+            if (!isAlarmRinging) {
+                document.getElementById("alarmIndicator").innerHTML = "⏰ Alarm aktif: menunggu pukul " + alarmWaktu;
+            }
+        }
+    }
+}, 1000);
+
+// Tambahkan event listener untuk memastikan audio bisa dimainkan setelah interaksi pengguna
+// (karena beberapa browser membutuhkan user gesture dulu)
+document.addEventListener('click', function enableAudio() {
+    const audio = document.getElementById("suara");
+    if (audio && audio.paused) {
+        // coba play dan langsung pause untuk 'mengaktifkan' audio context
+        audio.play().then(() => {
+            audio.pause();
+            audio.currentTime = 0;
+            console.log("Audio diaktifkan oleh interaksi pengguna");
+        }).catch(e => console.log("Audio enable error:", e));
+    }
+    // Hanya perlu sekali, tapi tidak apa jika berkali-kali
+}, { once: true });
+
+// Juga coba enable saat tombol set alarm ditekan
+const originalSetAlarm = setAlarm;
+window.setAlarm = function() {
+    // Coba aktifkan audio terlebih dahulu
+    const audio = document.getElementById("suara");
+    if (audio) {
+        audio.play().then(() => {
+            audio.pause();
+            audio.currentTime = 0;
+        }).catch(e => console.log("Pre-enable audio error:", e));
+    }
+    originalSetAlarm();
+};
+
+// Pastikan stopAlarm tersedia global
+window.stopAlarm = stopAlarm;
+</script>
+
+</body>
+</html>
